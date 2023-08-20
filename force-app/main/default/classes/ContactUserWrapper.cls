@@ -18,7 +18,8 @@ public class ContactUserWrapper {
     @AuraEnabled
     public String phone {get; set;}
 
-    public ContactUserWrapper(String firstName, String lastName, String email, String phone){
+    public ContactUserWrapper(Id userId, String firstName, String lastName, String email, String phone){
+        this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastname;
         this.email = email;
