@@ -1,0 +1,11 @@
+<template>
+    <template if:true={isContactUserAvailable}>
+        <div>
+            Name: {user.Name}
+            Email: {user.Email}
+        </div>        
+    </template>
+    <template if:false={isContactUserAvailable}>
+        <div class="slds-theme_shade slds-box slds-text-heading_medium slds-text-color_error slds-text-align_center">User is not avaiable for this Contact</div>
+    </template>
+</template>
