@@ -10,8 +10,7 @@
             <objects>
                 <object>Contact</object>
             </objects>
-            <property name="componentTitle" type="String" />
-            <property name="noUserMessage" type="String" />
+            <property name="componentTitle" type="String" description="Supply a title that will serve as the main heading for this component"/>
         </targetConfig>
     </targetConfigs>
 </LightningComponentBundle>

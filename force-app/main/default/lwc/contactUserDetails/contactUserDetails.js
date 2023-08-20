@@ -17,8 +17,8 @@ import { NavigationMixin } from 'lightning/navigation';
 export default class ContactUserDetails extends NavigationMixin(LightningElement){
     
     @api recordId;
-    @api noUserMessage;
     @api componentTitle;
+    noUserMessage
     contactRecord;
     contactUser;
     isContactUserAvailable = false;
@@ -26,9 +26,9 @@ export default class ContactUserDetails extends NavigationMixin(LightningElement
     /**
     * Retrieves contact record information using the @wire service to track changes in the record's fields.
     * If contact data is successfully retrieved, it updates the component's contactRecord and triggers the retrieval
-    * of associated user information using the email address.
-    * @param {Object} response - Contains information about the contact record or any error encountered.
-    */
+ * of associated user information using the email address.
+ * @param {Object} response - Contains information about the contact record or any error encountered.
+ */
     @wire(getRecord, {recordId: '$recordId', fields:[CONTACT_FIRSTNAME, CONTACT_LASTNAME, CONTACT_EMAIL, CONTACT_PHONE]})
     wiredContact({error, data}){
         if(data){
