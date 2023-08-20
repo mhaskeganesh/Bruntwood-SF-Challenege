@@ -27,7 +27,7 @@ public class ContactUserController {
             ];
             
             if(user != null){
-                return new ContactUserWrapper(user.FirstName, user.LastName, user.Email, user.Phone);
+                return new ContactUserWrapper(user.Id, user.FirstName, user.LastName, user.Email, user.Phone);
             }            
         }catch(Exception e){
             System.debug('Excpetion at ContactUserController: '+e.getMessage());

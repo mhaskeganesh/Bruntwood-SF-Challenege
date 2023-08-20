@@ -7,6 +7,8 @@
  *             This wrapper class provides a structured format to pass user details to the Lightning Web Component (Ex. contactUserDetails).
  */
 public class ContactUserWrapper {
+    @AuraEnabled
+    public String userId {get; set;}
 	@AuraEnabled
     public String firstName {get; set;}
     @AuraEnabled

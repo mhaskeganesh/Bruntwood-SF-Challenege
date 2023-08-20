@@ -5,13 +5,15 @@ import CONTACT_LASTNAME from '@salesforce/schema/Contact.LastName';
 import CONTACT_EMAIL from '@salesforce/schema/Contact.Email';
 import CONTACT_PHONE from '@salesforce/schema/Contact.Phone'; 
 import getContactUser from '@salesforce/apex/ContactUserController.getContactUser';
+import { NavigationMixin } from 'lightning/navigation';
 
-export default class ContactUserDetails extends LightningElement {
+export default class ContactUserDetails extends NavigationMixin(LightningElement){
     
     @api recordId;
+    @api noUserMessage;
     contactRecord;
+    contactUser;
     isContactUserAvailable = false;
-    noUserMessage = 'User not found';
 
     @wire(getRecord, {recordId: '$recordId', fields:[CONTACT_FIRSTNAME, CONTACT_LASTNAME, CONTACT_EMAIL, CONTACT_PHONE]})
     wiredContact({error, data}){
@@ -29,25 +31,22 @@ export default class ContactUserDetails extends LightningElement {
         }   
     }
 
-   random;
     fetchContactUserDetails(email){
         if(email){
             getContactUser({email: email})
             .then((result) => {
-                let data1;
-                if(result){
-                    console.log('*****233Inside22333****');
-                    this.random = result;
-                    data1 = result
-                    this.isContactUserAvailable = true;
-                }else{
-                    this.random = {};
-                    this.isContactUserAvailable = false;
-                }
-            //     console.log('Result: ',result);
-            //     console.log('User found 1: ',this.random);
-            //     console.log('Data 1: ',data1);
-            // 
+                try{
+                    if(result){   
+                        this.contactUser = result;
+                         this.isContactUserAvailable = true;
+                    }else{
+                        this.noUserMessage = 'No user found with this email address';
+                        this.random = {};
+                        this.isContactUserAvailable = false;
+                    }  
+                }catch(error){
+                    console.log('Exception: ', error);
+                }                         
             })
             .catch((error) => {
                 this.user1 = {};
@@ -55,9 +54,20 @@ export default class ContactUserDetails extends LightningElement {
                 console.log('Error while fetching user-contact details', error);
             })
         }else{
+            this.noUserMessage = 'Email address required to see the Contact User';
             this.random = {};
             this.isContactUserAvailable = false;
         }
     }
-    
+
+    handleViewUser(event){
+            this[NavigationMixin.Navigate]({
+                type:'standard__recordPage',
+                attributes:{
+                    recordId: this.contactUser.userId,
+                    objectApiName:'User',
+                    actionName:'view'
+                },
+            })    
+    }
 }
