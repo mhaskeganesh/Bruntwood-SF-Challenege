@@ -18,6 +18,7 @@ export default class ContactUserDetails extends NavigationMixin(LightningElement
     
     @api recordId;
     @api noUserMessage;
+    @api componentTitle;
     contactRecord;
     contactUser;
     isContactUserAvailable = false;

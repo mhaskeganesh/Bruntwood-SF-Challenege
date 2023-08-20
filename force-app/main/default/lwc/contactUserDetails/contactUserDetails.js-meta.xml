@@ -5,4 +5,13 @@
     <targets>
         <target>lightning__RecordPage</target>
     </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <objects>
+                <object>Contact</object>
+            </objects>
+            <property name="componentTitle" type="String" />
+            <property name="noUserMessage" type="String" />
+        </targetConfig>
+    </targetConfigs>
 </LightningComponentBundle>
